@@ -78,9 +78,11 @@ function controlclass(card_counter, clicked_cards, chosen_card){
         case 1:
             console.log("case 1");
 
-            if(clicked_cards[0] === clicked_cards[1]){
+            if(clicked_cards[0] === clicked_cards[1] && clicked_cards[card_counter] !== null){
+
                 $(chosen_card).addClass('match');
                 $("."+clicked_cards[0]).parent().addClass("match");
+                $(".open").removeClass("open show");
             }else{
                 /*$(chosen_card).toggleClass("open show");
                 $("."+clicked_cards[0]).parent().removeClass("open show");*/
@@ -105,31 +107,144 @@ function controlclass(card_counter, clicked_cards, chosen_card){
 
 
 }
+   var clicks =0;
+
+function count_clicks(){
+   clicks++;
+   console.log(clicks);
+   $(".moves").html(clicks) ;
+   console.log("num clcks"+clicks);
+
+   if(clicks>16&&clicks<26){
+
+$(".stars li:nth-child(3) ").css("display" ,"none");
+   }else if(clicks>=26&&clicks<32){
+    console.log("26");
+    $(".stars li:nth-child(2) ").css("display" ,"none");
+
+   }else if(clicks >=32){
+        $(".stars li:nth-child(1) ").css("display" ,"none");
+
+   }
+}
+
+
+
+
+function show_cards(selected){
+
+/*var open_items = 0;
+$(".open").each(
+                    function(index){
+                        
+                            open_items++;
+                        
+                       
+                    });
+
+
+console.log("open items : " + open_items);
+
+if(open_items<2){
+                           */  $(selected).toggleClass("open show");
+/*clicked_cards[card_counter] =   $(selected).children[0].classList.item(2);*/
+
+                    /*     }else{
+
+                            return;
+                         }
+
+
+
+
+$(".open").each(
+                    function(index){
+                        for(i=0;i<index;i++){
+                            open_items++;
+                        }
+                        if(open_items < 1 ){
+                         $(selected).toggleClass("open show");
+                        }else{
+                            $(".open").removeClass("open show");
+                         $(selected).toggleClass("open show");
+                        }
+                    });
+                    */
+
+
+}
+
+
+function count_open(){
+
+    var open_items = 0;
+$(".open").each(
+                    function(index){
+                        
+                            open_items++;
+                        
+                       
+                    });
+
+
+console.log("open items : " + open_items);
+
+if(open_items<2){
+return true;
+
+                         }else{
+
+                            return false;
+                         }
+
+}
+
 var clicked_cards = new Array(2);
 var card_counter = 0;
 
 $(".card").click( function set_clicked(e){
+
+
+
+if(count_open() === false){
+    console.log(count_open());
+    return;
+}
+
+
+
+
+
 var chosen_card = e.currentTarget;
-/*clicked_card[cardonshow] = e.currentTarget.children[0].className ;*/
 clicked_cards[card_counter] = e.currentTarget.children[0].classList.item(2);
-var  change_class_delayed = setTimeout(controlclass , 1000 , card_counter ,clicked_cards ,chosen_card);
+
+
+
+
+
+if( $(chosen_card).hasClass('open') === false){
+    show_cards(chosen_card);
+
+  var  change_class_delayed = setTimeout(controlclass , 2000 , card_counter ,clicked_cards ,chosen_card);
 
 
 if(card_counter ===0){
-    /*$(".card").each(function(){
-        $(this).removeClass("open show")
-        });*/
-    $(chosen_card).toggleClass("open show");
     card_counter++;
 }else if(card_counter === 1 ){
-    $(chosen_card).toggleClass("open show");
     card_counter--;
     change_class_delayed;
-    card_counter=0
 }
 console.log(card_counter + clicked_cards[card_counter]);
-/*console.log(cardonshow+" "+clicked_card[cardonshow][10]+clicked_card[cardonshow][11]+clicked_card[cardonshow][12]);
-*/
+}else{
+  $(this).removeClass("open show");
+        clicked_cards[card_counter] = null;
+
+  if(card_counter ===1){
+    card_counter-- ;
+  }
+}
+
+
 });
 
 
