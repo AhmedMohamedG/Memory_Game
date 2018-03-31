@@ -109,28 +109,31 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
 .score-panel .timer {
     display: inline;
     width: 10%;
     padding: 0 10%;
 }
+
 .score-panel .timer p {
     display: inline;
 }
+
+/*Congratulate panel*/
+
 .welldone {
     display: none;
     width: 100%;
     background-color: lightblue;
 }
 
-.unmatched {
-    background-color: red;
-}
 .congrats_mssg {
 
     display:block;
     text-align: center;
 }
+
 .repeat {
     display: block;
     margin-left: auto;
@@ -139,6 +142,15 @@ h1 {
     color: white;
     border-radius: 20%;
 }
+
+/*Unmatched cards*/
+
+.unmatched {
+    background-color: red;
+}
+
+/*responsive for small screens*/
+
 @media screen and (max-width: 720px){
 
 .deck {
@@ -148,28 +160,31 @@ h1 {
     flex-wrap: wrap;
     margin: 0 0 3em;
 }
+
 .deck .card {
     height: 20vh;
     width: 20vh;
     margin: 2vh;
     border-radius: 8px;
 }
+
 .score-panel {
     width: 90%
 }
 
-
-
 }
+
+/*minor breaking point for score panel on cell phones*/
+
 @media screen and (max-width: 420px){
 .score-panel , .score-panel .stars ,.score-panel .restart
  , .score-panel .stars ,.score-panel .moves {
-
 display: block;
 margin: auto;
 float: none;
 text-align: center;
 }
+
 .seconds ,.timer p, .timer {
     display: block;
 text-align: center;

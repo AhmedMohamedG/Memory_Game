@@ -3,6 +3,9 @@ $( document ).ready(function pageScript(){
  * Create a list that holds all of your cards
  */
 
+var class_array = ["fa-diamond","fa-paper-plane-o","fa-anchor","fa-bolt","fa-cube","fa-leaf",
+"fa-bicycle","fa-bomb","fa-diamond","fa-paper-plane-o","fa-anchor","fa-bolt","fa-cube","fa-leaf",
+"fa-bicycle","fa-bomb"];
 
 /*
  * Display the cards on the page
@@ -10,13 +13,6 @@ $( document ).ready(function pageScript(){
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-
-
-var class_array = ["fa-diamond","fa-paper-plane-o","fa-anchor","fa-bolt","fa-cube","fa-leaf",
-"fa-bicycle","fa-bomb","fa-diamond","fa-paper-plane-o","fa-anchor","fa-bolt","fa-cube","fa-leaf",
-"fa-bicycle","fa-bomb"];
-
-
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -31,15 +27,16 @@ function shuffle(array) {
     }
     return array;
 }
+
 shuffle(class_array);
 
 /*destrubute class to the list elemnts*/
-$(".boster").each(
-function(index){
-    console.log("hi")
 
-$(this).toggleClass(class_array[index]);
+$(".boster").each(
+    function(index){
+        $(this).toggleClass(class_array[index]);
 });
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -50,6 +47,8 @@ $(this).toggleClass(class_array[index]);
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+ /*Check if the cards matches or not*/
 var matches_count=0;
 function controlclass(card_counter, clicked_cards, chosen_card){
     switch(card_counter){
@@ -68,64 +67,47 @@ function controlclass(card_counter, clicked_cards, chosen_card){
                 }
                  red_card();
                 function reset_red(){
-               $(".unmatched").css( "background", "");
-                $(".open").removeClass("open show unmatched");
-
+                    $(".unmatched").css( "background", "");
+                    $(".open").removeClass("open show unmatched");
                 }
-    
                 setTimeout(reset_red,500);
-        
             }
-   }
+    }
     if(matches_count === 16){
         welldone();
-
     }
 }
+
+/*When all cards choosed corectly*/
+
 function welldone(){
-
     time_watch(false);
-        var message="<em>Congratualtions</em> <br> you have completed the game in "+seconds+" seconds <br> your star rating is "+stars;
-
-     $(".congrats_mssg").html(message);
-     $(".welldone").css("display","block");
-     $(".repeat").click(function(){
+    var message="<em>Congratualtions</em> <br> you have completed the game in "+seconds+" seconds <br> your star rating is "+stars;
+    $(".congrats_mssg").html(message);
+    $(".welldone").css("display","block");
+    $(".repeat").click(function(){
              location.reload(); 
-
      });
 }
 
-
+/*stop watch functions*/
 var seconds =0;
 var increment_seconds = null;
-function time_watch(true_false){
-
-    
-
-                 
-      
-
+function time_watch(true_false){                 
     if(true_false){
         increment_seconds = setInterval(function(){ 
-        console.log("started time");
-         seconds++;
+        seconds++;
         $(".seconds").html(seconds);},1000);  
-      
     }else{
- console.log("all done");
- clearInterval(increment_seconds);
- console.log("stop_timing called");
- return;
-    }
-                   
-      
-
+        clearInterval(increment_seconds);
+        return;
+    }                       
 }
-             
+/*counting how many clicks and reducing stars*/             
 var clicks=0;
 var stars=3;
 function count_clicks(){
-   clicks++;
+    clicks++;
     $(".moves").html(clicks);
     if(clicks === 1){
     time_watch(true);
@@ -134,18 +116,15 @@ function count_clicks(){
         stars=2;
     }else if(clicks>=26&&clicks<32){
         $(".stars li:nth-child(2) ").css("display" ,"none");
-                stars=1;
+        stars=1;
     }else if(clicks >=32){
         $(".stars li:nth-child(1) ").css("display" ,"none");
-                stars=0;
+        stars=0;
     }
 }
 
- 
-    
-   
+/* show cards and rotate them*/       
 function show_cards(selected){
-
     $(selected).toggleClass("open show");
     function rotate_card(){
         $(selected).css( "transform", "rotate(20deg)");
@@ -154,18 +133,14 @@ function show_cards(selected){
     function reset_rotate(){
         $(selected).css( "transform", "rotate(0)");
     }
-    
     setTimeout(reset_rotate,250);
-
 }
 
-
+/*only 2 cards can be open*/
 function count_open(){
-
     var open_items = 0;
-    $(".open").each(
-        function(index){
-            open_items++;   
+    $(".open").each(function(index){
+        open_items++;   
     });
     if(open_items<2){
         return true;
@@ -174,6 +149,7 @@ function count_open(){
     }
 }
 
+/*Main function when cards clicked call other functions*/
 var clicked_cards = new Array(2);
 var card_counter = 0;
 
@@ -201,9 +177,9 @@ $(".card").click( function set_clicked(e){
     }
 });
 
+/* reload page*/
 
 $(".restart").click(function restart_page(){
-
      location.reload(); 
 });
 
