@@ -62,19 +62,37 @@ function controlclass(card_counter, clicked_cards, chosen_card){
                 $(".open").removeClass("open show");
                 matches_count +=2;
             }else{
-                $(".open").removeClass("open show");
+                $(".open").addClass("unmatched");
+                function red_card(){
+                    $(".unmatched").css( "background", "red");
+                }
+                 red_card();
+                function reset_red(){
+               $(".unmatched").css( "background", "");
+                $(".open").removeClass("open show unmatched");
+
+                }
+    
+                setTimeout(reset_red,500);
+        
             }
    }
     if(matches_count === 16){
         welldone();
 
-}
-
+    }
 }
 function welldone(){
 
-    time_watch(false);      
+    time_watch(false);
+        var message="<em>Congratualtions</em> <br> you have completed the game in "+seconds+" seconds <br> your star rating is "+stars;
 
+     $(".congrats_mssg").html(message);
+     $(".welldone").css("display","block");
+     $(".repeat").click(function(){
+             location.reload(); 
+
+     });
 }
 
 
@@ -105,7 +123,7 @@ function time_watch(true_false){
 }
              
 var clicks=0;
-
+var stars=3;
 function count_clicks(){
    clicks++;
     $(".moves").html(clicks);
@@ -113,17 +131,31 @@ function count_clicks(){
     time_watch(true);
     }else if(clicks>16&&clicks<26){
         $(".stars li:nth-child(3) ").css("display" ,"none");
+        stars=2;
     }else if(clicks>=26&&clicks<32){
         $(".stars li:nth-child(2) ").css("display" ,"none");
+                stars=1;
     }else if(clicks >=32){
         $(".stars li:nth-child(1) ").css("display" ,"none");
+                stars=0;
     }
 }
 
-
+ 
+    
+   
 function show_cards(selected){
 
     $(selected).toggleClass("open show");
+    function rotate_card(){
+        $(selected).css( "transform", "rotate(20deg)");
+    }
+    rotate_card();
+    function reset_rotate(){
+        $(selected).css( "transform", "rotate(0)");
+    }
+    
+    setTimeout(reset_rotate,250);
 
 }
 
@@ -154,14 +186,14 @@ $(".card").click( function set_clicked(e){
     clicked_cards[card_counter] = e.currentTarget.children[0].classList.item(2);
     if( $(chosen_card).hasClass('open') === false){
         show_cards(chosen_card);
-     setTimeout(controlclass , 750 , card_counter ,clicked_cards ,chosen_card);
-    if(card_counter ===0){
-        card_counter++;
-    }else if(card_counter === 1 ){
-        card_counter--;
-    }
+        setTimeout(controlclass , 500 , card_counter ,clicked_cards ,chosen_card);
+        if(card_counter ===0){
+            card_counter++;
+        }else if(card_counter === 1 ){
+            card_counter--;
+        }
     }else{
-        $(this).removeClass("open show");
+        $(chosen_card).removeClass("open show");
         clicked_cards[card_counter] = null;
         if(card_counter ===1){
             card_counter-- ;

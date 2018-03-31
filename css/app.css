@@ -7,7 +7,9 @@ html {
 *::after {
     box-sizing: inherit;
 }
-
+*{
+    transition: transform 0.25s;
+}
 html,
 body {
     width: 100%;
@@ -66,7 +68,7 @@ h1 {
 }
 
 .deck .card.open {
-    transform: rotateY(0);
+   /* transform: rotate(-20deg);*/
     background: #02b3e4;
     cursor: default;
 }
@@ -106,4 +108,73 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+.score-panel .timer {
+    display: inline;
+    width: 10%;
+    padding: 0 10%;
+}
+.score-panel .timer p {
+    display: inline;
+}
+.welldone {
+    display: none;
+    width: 100%;
+    background-color: lightblue;
+}
+
+.unmatched {
+    background-color: red;
+}
+.congrats_mssg {
+
+    display:block;
+    text-align: center;
+}
+.repeat {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: blue;
+    color: white;
+    border-radius: 20%;
+}
+@media screen and (max-width: 720px){
+
+.deck {
+    width: 90%;
+    padding: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 0 3em;
+}
+.deck .card {
+    height: 20vh;
+    width: 20vh;
+    margin: 2vh;
+    border-radius: 8px;
+}
+.score-panel {
+    width: 90%
+}
+
+
+
+}
+@media screen and (max-width: 420px){
+.score-panel , .score-panel .stars ,.score-panel .restart
+ , .score-panel .stars ,.score-panel .moves {
+
+display: block;
+margin: auto;
+float: none;
+text-align: center;
+}
+.seconds ,.timer p, .timer {
+    display: block;
+text-align: center;
+margin: 0;
+padding: 0;
+}
+
 }
