@@ -82,7 +82,7 @@ function controlclass(card_counter, clicked_cards, chosen_card){
 
 function welldone(){
     time_watch(false);
-    let message="<em>Congratualtions</em> <br> you have completed the game in "+seconds+" seconds <br> with "+clicks+" clicks"+"<br>your star rating is "+stars;
+    let message="<em>Congratulations</em> <br> you have completed the game in "+seconds+" seconds <br> with "+clicks+" clicks"+"<br>your star rating is "+stars;
     $(".congrats_mssg").html(message);
     $(".welldone").css("display","block");
     $(".repeat").click(function(){
