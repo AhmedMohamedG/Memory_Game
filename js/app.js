@@ -114,7 +114,7 @@ $( document ).ready(function pageScript(){
        /* }else if(clicks>16&&clicks<26){
             $(".stars li:nth-child(3) ").css("display" ,"none");
             stars=2;
-        }*/else if(clicks>=26&&clicks<32){
+        }*/}else if(clicks>=26&&clicks<32){
             $(".stars li:nth-child(3) ").css("display" ,"none");
             stars=2;
         }else if(clicks >=32){
