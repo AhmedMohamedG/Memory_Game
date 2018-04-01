@@ -154,13 +154,13 @@ $( document ).ready(function pageScript(){
 /*Main function when cards clicked call other functions*/
     let clicked_cards = new Array(2);
     let card_counter = 0;
+    let chosen_card = e.currentTarget;
 
     $(".card").click( function set_clicked(e){
         if(count_open() === false || $(chosen_card).hasClass('open') ){
             return;
         }
         count_clicks();
-        let chosen_card = e.currentTarget;
         clicked_cards[card_counter] = e.currentTarget.children[0].classList.item(2);
         if( $(chosen_card).hasClass('open') === false){
             show_cards(chosen_card);
