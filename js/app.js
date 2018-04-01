@@ -156,10 +156,10 @@ $( document ).ready(function pageScript(){
     let card_counter = 0;
 
     $(".card").click( function set_clicked(e){
-        count_clicks();
-        if(count_open() === false){
+        if(count_open() === false || $(chosen_card).hasClass('open') ){
             return;
         }
+        count_clicks();
         let chosen_card = e.currentTarget;
         clicked_cards[card_counter] = e.currentTarget.children[0].classList.item(2);
         if( $(chosen_card).hasClass('open') === false){
@@ -170,13 +170,13 @@ $( document ).ready(function pageScript(){
             }else if(card_counter === 1 ){
                 card_counter--;
             }
-        }else{
+        }/*else{
             $(chosen_card).removeClass("open show");
             clicked_cards[card_counter] = null;
             if(card_counter ===1){
                 card_counter-- ;
             }
-        }
+        }*/
     });
 
 /* reload page*/
