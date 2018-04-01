@@ -3,7 +3,7 @@ $( document ).ready(function pageScript(){
  * Create a list that holds all of your cards
  */
 
-var class_array = ["fa-diamond","fa-paper-plane-o","fa-anchor","fa-bolt","fa-cube","fa-leaf",
+let class_array = ["fa-diamond","fa-paper-plane-o","fa-anchor","fa-bolt","fa-cube","fa-leaf",
 "fa-bicycle","fa-bomb","fa-diamond","fa-paper-plane-o","fa-anchor","fa-bolt","fa-cube","fa-leaf",
 "fa-bicycle","fa-bomb"];
 
@@ -49,7 +49,7 @@ $(".boster").each(
  */
 
  /*Check if the cards matches or not*/
-var matches_count=0;
+let matches_count=0;
 function controlclass(card_counter, clicked_cards, chosen_card){
     switch(card_counter){
         case 0:
@@ -82,7 +82,7 @@ function controlclass(card_counter, clicked_cards, chosen_card){
 
 function welldone(){
     time_watch(false);
-    var message="<em>Congratualtions</em> <br> you have completed the game in "+seconds+" seconds <br> your star rating is "+stars;
+    let message="<em>Congratualtions</em> <br> you have completed the game in "+seconds+" seconds <br> with "+clicks+" clicks"+"<br>your star rating is "+stars;
     $(".congrats_mssg").html(message);
     $(".welldone").css("display","block");
     $(".repeat").click(function(){
@@ -91,8 +91,8 @@ function welldone(){
 }
 
 /*stop watch functions*/
-var seconds =0;
-var increment_seconds = null;
+let seconds =0;
+let increment_seconds = null;
 function time_watch(true_false){                 
     if(true_false){
         increment_seconds = setInterval(function(){ 
@@ -104,8 +104,8 @@ function time_watch(true_false){
     }                       
 }
 /*counting how many clicks and reducing stars*/             
-var clicks=0;
-var stars=3;
+let clicks=0;
+let stars=3;
 function count_clicks(){
     clicks++;
     $(".moves").html(clicks);
@@ -138,7 +138,7 @@ function show_cards(selected){
 
 /*only 2 cards can be open*/
 function count_open(){
-    var open_items = 0;
+    let open_items = 0;
     $(".open").each(function(index){
         open_items++;   
     });
@@ -150,15 +150,15 @@ function count_open(){
 }
 
 /*Main function when cards clicked call other functions*/
-var clicked_cards = new Array(2);
-var card_counter = 0;
+let clicked_cards = new Array(2);
+let card_counter = 0;
 
 $(".card").click( function set_clicked(e){
     count_clicks();
     if(count_open() === false){
         return;
     }
-    var chosen_card = e.currentTarget;
+    let chosen_card = e.currentTarget;
     clicked_cards[card_counter] = e.currentTarget.children[0].classList.item(2);
     if( $(chosen_card).hasClass('open') === false){
         show_cards(chosen_card);
