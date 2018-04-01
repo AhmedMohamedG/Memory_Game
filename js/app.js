@@ -154,9 +154,9 @@ $( document ).ready(function pageScript(){
 /*Main function when cards clicked call other functions*/
     let clicked_cards = new Array(2);
     let card_counter = 0;
-    let chosen_card = e.currentTarget;
 
     $(".card").click( function set_clicked(e){
+        let chosen_card = e.currentTarget;
         if(count_open() === false || $(chosen_card).hasClass('open') ){
             return;
         }
